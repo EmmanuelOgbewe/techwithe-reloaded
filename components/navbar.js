@@ -77,7 +77,7 @@ export default class Navbar extends Component {
                         <Link href="mailto:techwithe@gmail.com" target="_blank" passHref><StyledLink presentMenu={this.state.presentMenu} >Contact</StyledLink></Link>
                     </Links>
                     <MenuButton onClick={() => this.showMenu()} presentMenu={this.state.presentMenu}>
-                      <FontAwesomeIcon icon={faBars} color="black" size="lg" />
+                      <FontAwesomeIcon icon={faBars} color={this.state.presentMenu ? 'white' : 'black'} size="lg" />
                     </MenuButton>
                 </NavBarStyle>
                
@@ -94,7 +94,7 @@ const NavBarStyle = styled.main.attrs( props => ({
     background-color : ${props => props.presentMenu ? '#101010' : 'white'};
     & {
         h1 {
-            ${props => props.presentMenu ?  tw`text-base sm:text-2xl italic font-semibold text-white  lg:pl-16` : tw`text-base sm:text-2xl italic font-semibold text-black ` }
+            ${props => props.presentMenu ?  tw`text-base sm:text-2xl italic font-semibold mb-0 text-white  lg:pl-16` : tw`text-base mb-0 sm:text-2xl italic font-bold text-black ` }
         }
 
     }
@@ -103,7 +103,7 @@ const NavBarStyle = styled.main.attrs( props => ({
 const StyledLink = styled.a.attrs((props) => ({
     className : `${props.presentMenu ?  'text-white'  : 'text-gray-700' }`
 }))`
-    ${tw`  text-base font-light focus:text-black`}
+    ${tw`  text-base font-normal  hover:text-black focus:text-black`}
 `
 
   const NavItem = styled.button`
@@ -124,7 +124,7 @@ const StyledLink = styled.a.attrs((props) => ({
   })`
     & {
       button {
-        ${tw`flex flex-col items-center outline-none`}
+        ${tw`flex flex-col items-center outline-none focus:outline-none`}
       }
       ion-icon {
         ${props => props.presentMenu? tw` text-white text-2xl sm:text-3xl ` : tw`text-black text-2xl sm:text-3xl`}

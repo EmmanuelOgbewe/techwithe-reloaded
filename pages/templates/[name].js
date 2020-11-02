@@ -23,20 +23,24 @@ const submissionInfo = 'Fill out the form below and you will be contacted within
 const submissionCompleted = `You will be contacted within 1 - 5 business days with a quote for your site and \n
 more information on moving forward. Thank you!`;
 
-const QuoteForm = ({setCompleted}) => {
-    const [name , setName] = useState("");
+const QuoteForm = ({setCompleted, templateData}) => {
+    const [fname , setFirstName] = useState("");
+    const [lname , setLastName] = useState("");
     const [email , setEmail] = useState("");
     const [phoneNumber , setPhoneNumber] = useState("");
     const [comments, setComments] = useState("");
     const [showLoader, setLoader] = useState(false);
     const [showError , setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const {TextArea} = Input;
     const antIcon = <LoadingOutlined style={{ fontSize: 24, color:"white" }} spin />;
 
     const onChange = (e) => {
         switch (e.target.name) {
-            case "name" : setName(e.target.value);
+            case "fname" : setFirstName(e.target.value);
+            break;
+            case "lname" : setLastName(e.target.value);
             break;
             case "email" : setEmail(e.target.value);
             break;
@@ -50,53 +54,58 @@ const QuoteForm = ({setCompleted}) => {
 
     const handleSubmit = () =>{
         //post request to local api 
-        const data = {email : "emmail"};
-        // console.log(window.location);
-
-        fetch('http://localhost:3000/api/subscribe', {
-            method: 'POST', // or 'PUT'
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
         
-        // if(!email.includes("@")){
-        //     console.log("Invalid email");
-        //     setError(true);
-        //     return;
-        // }
+        if(!email.includes("@")){
+            console.log("Invalid email");
+            setErrorMessage("Invalid email.")
+            setError(true);
+            return;
+        }
 
-        // if(name.length !== 0 && email.length !== 0 ){
-        //     setError(false);
-        //     setLoader(true);
-        //     setTimeout(function(e){
-        //         console.log("Information logged");
-        //         console.log(` name : ${name} \n email: ${email} \n phoneNumber: ${phoneNumber} \n comments: ${comments} `)
-        //         setLoader(false);
-        //         setCompleted(true);
-        //     },1000);
-        // } else {
-        //     // show alert 
-        //     setError(true);
-        //     console.log("Invalid form")
-        // }
+        if(name.length !== 0 && email.length !== 0 ){
+            setError(false);
+            setLoader(true);
+            const data = {templateName:templateData.name, templateID: templateData.id, email : email, fname: fname, lname: lname, phoneNumber: phoneNumber, comments:comments};
+       
+
+            fetch('/api/subscribeTemplate', {
+                method: 'POST', // or 'PUT'
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => {
+                if(response.status === 200){
+                  
+                    console.log(response.body);
+                    setLoader(false);
+                    setCompleted(true);
+                } else {
+                    // error 
+                    setLoader(false);
+                    setErrorMessage(response.errorMessage);
+                    setError(true);
+                }
+            })
+
+        } else {
+            // show alert 
+            setErrorMessage("Invalid email.")
+            setError(true);
+            
+            console.log("Invalid form")
+        }
     }
 
     return (
         <div>
-            {showError ? <ErrorMessage >Invalid. Please try again</ErrorMessage> : null }
+            {showError ? <ErrorMessage >{errorMessage}</ErrorMessage> : null }
            
             <ModalSectionTwo>
                 <ModalFormInputOne>
-                    <Input onChange={onChange} name="name" placeholder="Name*"/>
+                    <Input onChange={onChange} name="fname" placeholder="First name*"/>
+                    <Input onChange={onChange} name="lname" placeholder="Last name*"/>
                     <Input onChange={onChange} name="email" placeholder="Email*"/>
                     <Input onChange={onChange} name="phoneNumber" placeholder="Phone number"/>
                  </ModalFormInputOne>
@@ -195,7 +204,7 @@ export default function Details({templateData}) {
                         </div>
                     </ModalSectionOne>
                     }
-                    {submitted ? null :  <QuoteForm  setCompleted={(val) => setSubmitted(val)}/>}
+                    {submitted ? null :  <QuoteForm templateData={templateDetails}  setCompleted={(val) => setSubmitted(val)}/>}
                 </ModalWrapper>
 
             </Modal>
@@ -354,6 +363,9 @@ const Price = styled.main`
 `
 const Preview = styled(ButtonStyle)`
      ${tw`mt-4 md:mt-0 border border-gray-400 bg-white text-black  `} 
+     a {
+        ${tw`text-black`}
+     }
 `
 
 const GetStarted = styled(ButtonStyle)`

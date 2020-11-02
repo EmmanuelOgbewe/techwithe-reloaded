@@ -5,7 +5,7 @@ import {scrollToDiv} from '../lib/scroll';
 import Link from 'next/link';
 import Head from 'next/head';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import {useRouter} from 'next/router';
 
 export default class Footer extends Component {
 
@@ -14,28 +14,59 @@ export default class Footer extends Component {
         this.state = {
             didSubmit : false,
             email : '',
-            errorMessage : null
+            errorMessage : null,
+            buttonDisabled : false,
         }
         this.submitEmail = this.submitEmail.bind(this);
         this.changeEmail = this.changeEmail.bind(this);
+        
     }
     componentDidMount() {
-
+       
     }
+
 
     submitEmail(e){
         e.preventDefault();
-
+        
         if(this.state.email.includes('@')){
             //submit if user email if valid 
-            this.setState({
-                didSubmit : true,
-                errorMessage : null
-            })
+            fetch("/api/newsletter", {
+                method: 'POST', // or 'PUT'
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({email : this.state.email}),
+
+            }).then((response)  => {
+                if(response.status === 200){
+
+                    this.setState({
+                        didSubmit : true,
+                        errorMessage : null,
+                        buttonDisabled : false
+                        
+                    })
+                } else {
+                   response.json().then((data) => {
+                        console.log("User has been added");
+                        console.log(data);
+                    
+                        this.setState({
+                            didSubmit : false,
+                            errorMessage : data.errorMessage,
+                            buttonDisabled : false
+                            
+                        })
+                   });
+                }
+            });
+
         } else {
     
             this.setState({
-                errorMessage : 'Please enter a valid email.'
+                errorMessage : 'Please enter a valid email.',
+                buttonDisabled : false,
             })
         }
 
@@ -51,6 +82,8 @@ export default class Footer extends Component {
     }
     
     render () {
+       
+
         return (
             <FooterWrapper id="footer">
                 <Head>
@@ -137,7 +170,7 @@ export default class Footer extends Component {
 
 const StayUpToDate = styled.label`
     label {
-        ${tw`text-lg md:text-2xl lg:text-3xl text-center font-light`}
+        ${tw`text-lg md:text-2xl lg:text-3xl text-center font-normal`}
     }
 `
 const EmailInput = styled.main.attrs({
@@ -163,7 +196,7 @@ const Sections = styled.div`
             ${tw`flex flex-col space-y-8 `}
         }
         h1 {
-            ${tw`font-medium text-white  text-sm md:text-base`}
+            ${tw`font-medium text-white m-0  text-sm md:text-base`}
         } 
         /* a {
             ${tw`font-medium text-gray-300 text-opacity-50 text-sm md:text-base`}
@@ -180,7 +213,7 @@ const Sections = styled.div`
 `
 
 const StyledLink = styled.a`
-    ${tw`font-normal text-gray-300 text-opacity-50 text-sm md:text-base`}
+    ${tw`font-normal text-gray-300 text-opacity-50 hover:text-gray-300 text-sm md:text-base`}
 `
 const TechWithE = styled.label`
     ${tw`text-white font-semibold italic  w-full mt-24 `}

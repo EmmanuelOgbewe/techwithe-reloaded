@@ -15,7 +15,7 @@ export const SectionOneWrapper = styled.main.attrs(props => ({
             ${tw`font-normal text-4xl pr-0 md:pr-16 lg:pr-0`}
         } 
         p {
-            ${tw`text-lg  font-light mt-8 mr-8`}
+            ${tw`text-lg  font-normal mt-8 mr-8`}
         }
     }
 `
@@ -24,14 +24,14 @@ export const ButtonStyle = styled.button`
     ${tw`text-base font-light text-gray-600  mt-12 bg-gray-200 focus:outline-none p-4 transition duration-500 ease-in-out hover:bg-gray-300`}
 `
 export const SectionTwoWrapper = styled.main.attrs({
-    className : `hidden justify-center h-full w-full xl:p-16 xxl:p-32 lg:flex`
+    className : `hidden justify-center  w-full xl:p-16 xxl:p-32 lg:flex`
 })`
     & {
         div {
-            ${tw`flex flex-col  bg-blue-400 justify-center`}
+            ${tw`flex flex-col justify-center`}
         }
         img {
-            ${tw`object-cover lg:h-full w-full`}
+            ${tw`object-cover  w-full`}
         }
     }
 `

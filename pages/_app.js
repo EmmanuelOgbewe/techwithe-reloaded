@@ -1,5 +1,7 @@
 import '../styles/globals.css'
 import '../styles/tailwind.css'
+import 'antd/dist/antd.css';
+
 
 
 

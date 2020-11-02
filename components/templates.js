@@ -16,7 +16,7 @@ function CollectionItem({url, templateName,category }) {
                             <h1 className="">{templateName}</h1>
                             <p className="">{category}</p>
                         </section> 
-                        <button className="border border-gray-600 h-10 w-24 text-black" ><Link  href={`/templates/${templateName}`}>View</Link></button>
+                        <Link  href={`/templates/${templateName}`}passHref><StyledLink>View</StyledLink></Link>
                     </div>
                 </TemplateDescription>
             </div>
@@ -57,6 +57,10 @@ const TemplateDescription = styled.div`
         div {
             ${tw`flex flex-row justify-between mt-4`}
         }
+
+        h1, p {
+            ${tw`m-0`}
+        }
     }
 `
 
@@ -80,6 +84,11 @@ const CollectionItemStyle = styled.main.attrs({
             ${tw`text-gray-700 font-normal text-sm`}
         }
     }
+`
+const StyledLink = styled.a.attrs((props) => ({
+    className : 'border border-gray-600 flex items-center justify-center  h-10 w-24'
+}))`
+    ${tw`  text-sm font-normal text-center  text-black hover:text-black focus:text-black`}
 `
 
 const TemplatesWrapperStyle = styled.main.attrs({

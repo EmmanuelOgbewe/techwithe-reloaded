@@ -1,5 +1,5 @@
 
-@import '~antd/dist/antd.css';
+
 
 html,
 body {
@@ -11,6 +11,7 @@ body {
 
 div {
   font-family : 'Poppins', sans-serif;
+
 }
 
 
