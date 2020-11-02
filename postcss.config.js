@@ -17,6 +17,7 @@ module.exports = {
           process.env.NODE_ENV === "production"
           ? [
               "@fullhuman/postcss-purgecss",
+
               {
                 content: [
                   "./pages/**/*.{js,jsx,ts,tsx}",
@@ -24,7 +25,9 @@ module.exports = {
                 ],
                 defaultExtractor: (content) =>
                   content.match(/[\w-/:]+(?<!:)/g) || [],
+                whitelist: () => ['antd/dist/antd.css'],
               },
+              
             ]
           : undefined,
         //   [
