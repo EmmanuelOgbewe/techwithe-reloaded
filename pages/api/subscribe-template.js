@@ -16,6 +16,8 @@ const updateUserTag =  async (email, templateName) => {
   const tag = `T_${templateName}_QR`;
   const subscriberHash = md5(email);
 
+  console.log(tag);
+
   const response = await mailchimp.lists.updateListMemberTags(
     listId,
     subscriberHash,

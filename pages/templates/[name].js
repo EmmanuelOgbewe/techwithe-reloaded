@@ -56,7 +56,6 @@ const QuoteForm = ({setCompleted, templateData}) => {
         //post request to local api 
        
         if(!email.includes("@")){
-            console.log("Invalid email");
             setErrorMessage("Invalid email.")
             setError(true);
             return;
@@ -68,17 +67,20 @@ const QuoteForm = ({setCompleted, templateData}) => {
             const data = {templateName:templateData.name, templateID: templateData.id, email : email, fname: fname, lname: lname, phoneNumber: phoneNumber, comments:comments};
        
 
-            fetch('/api/subscribeTemplate', {
+            fetch('https://techwithe-reloaded.vercel.app/api/subscribe-template', {
                 method: 'POST', // or 'PUT'
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data),
             })
-            .then(response => {
-                if(response.status === 200){
-                  
-                    console.log(response.body);
+            .then(response =>  {
+                if(response.status === 200) {
+                    
+                    response.json().then((data) => {
+                        console.log(data);
+                    })
+
                     setLoader(false);
                     setCompleted(true);
                 } else {
@@ -94,7 +96,6 @@ const QuoteForm = ({setCompleted, templateData}) => {
             setErrorMessage("Fill in the required fields (*).")
             setError(true);
             
-            console.log("Invalid form")
         }
     }
 
@@ -135,8 +136,6 @@ export default function Details({templateData}) {
        
 
         let currentTemplate = templates[query.name];
-        console.log(router.query);
-        console.log(currentTemplate);
         if(currentTemplate === undefined){
             return null;
         }

@@ -1,5 +1,5 @@
 import mailchimp from "@mailchimp/mailchimp_marketing";
-import {addUserToAudience, userInList} from './subscribeTemplate';
+import {addUserToAudience, userInList} from './subscribe-template';
 
 const md5 = require("md5");
 
