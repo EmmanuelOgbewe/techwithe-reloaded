@@ -49,7 +49,6 @@ export default class Footer extends Component {
                     })
                 } else {
                    response.json().then((data) => {
-                        console.log("User has been added");
                         console.log(data);
                     
                         this.setState({

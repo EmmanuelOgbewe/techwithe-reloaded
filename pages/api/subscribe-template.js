@@ -103,8 +103,9 @@ export default async (req, res) => {
       res.status(200).json({ userAdded: true });
 
     } catch (e){
-      res.json({ errorMessage: e.message });
-      console.log("e");
+      console.log(e);
+      res.status(400).json({ errorMessage: e.message });
+
     } 
   
 }

@@ -65,9 +65,8 @@ const QuoteForm = ({setCompleted, templateData}) => {
             setError(false);
             setLoader(true);
             const data = {templateName:templateData.name, templateID: templateData.id, email : email, fname: fname, lname: lname, phoneNumber: phoneNumber, comments:comments};
-       
-
-            fetch('https://techwithe-reloaded.vercel.app/api/subscribe-template', {
+           
+            fetch('/api/subscribe-template', {
                 method: 'POST', // or 'PUT'
                 headers: {
                     'Content-Type': 'application/json',
