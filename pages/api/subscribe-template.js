@@ -70,8 +70,11 @@ export const userInList = async (email) => {
     if (e.status === 404) {
       console.error(`This email is not subscribed to this list`);
       return false;
+    } else {
+      return e;
     }
   }
+
 }
 
 
@@ -81,7 +84,8 @@ export const userInList = async (email) => {
  */
 export default async (req, res) => {
 
- 
+  console.log("Running subscription api");
+
   const userData = {
     firstName: req.body.fname,
     lastName: req.body.lname,

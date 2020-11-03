@@ -22,20 +22,17 @@ export default async (req, res) => {
   
     var inlist = await userInList(userData.email);
   
-      try{
-  
+    try{
         if(inlist === false){
           var response = await addUserToAudience(userData);
           console.log("User has been added to list", response.id );
           res.status(200).json({ userAdded: true });
         } else{
-          res.status(400).json({ errorMessage: "It appears you have been added to the list already."});
+        
+          res.status(404).json({ errorMessage: "It appears you have been added to the list already."});
         }
-
-       
-  
       } catch (e){
-        res.json({ errorMessage: e.message});
+        res(400).json({ errorMessage: e.message});
       } 
     
   }
