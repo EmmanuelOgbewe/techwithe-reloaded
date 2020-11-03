@@ -69,10 +69,12 @@ export default class Navbar extends Component {
               
               </Head>
                 <NavBarStyle isScrolling={this.state.isScrolling} presentMenu={this.state.presentMenu} >
-                    <Link href="/"><h1>TECHW/E</h1></Link>
+                    <Link href="/"><h1 className="cursor-pointer">TECHW/E</h1></Link>
                     <Links presentMenu={this.state.presentMenu}>
                         <Link href={"/"} passHref><StyledLink presentMenu={this.state.presentMenu} >Home</StyledLink></Link>
                         <NavItem onClick={() => this.handleNavigation()}><StyledLink presentMenu={this.state.presentMenu} >Templates</StyledLink></NavItem>
+                        <Link href={"/faq"} passHref><StyledLink presentMenu={this.state.presentMenu} >FAQ</StyledLink></Link>
+                        <Link href={"/"} passHref><StyledLink presentMenu={this.state.presentMenu} >About</StyledLink></Link>
                         {/* <a href="https://www.w3schools.com">Learn</a> */}
                         <Link href="mailto:techwithe@gmail.com" target="_blank" passHref><StyledLink presentMenu={this.state.presentMenu} >Contact</StyledLink></Link>
                     </Links>

@@ -54,7 +54,7 @@ const QuoteForm = ({setCompleted, templateData}) => {
 
     const handleSubmit = () =>{
         //post request to local api 
-        
+       
         if(!email.includes("@")){
             console.log("Invalid email");
             setErrorMessage("Invalid email.")
@@ -62,7 +62,7 @@ const QuoteForm = ({setCompleted, templateData}) => {
             return;
         }
 
-        if(name.length !== 0 && email.length !== 0 ){
+        if(fname.length !== 0 && lname.length !== 0 && email.length !== 0 ){
             setError(false);
             setLoader(true);
             const data = {templateName:templateData.name, templateID: templateData.id, email : email, fname: fname, lname: lname, phoneNumber: phoneNumber, comments:comments};
@@ -91,7 +91,7 @@ const QuoteForm = ({setCompleted, templateData}) => {
 
         } else {
             // show alert 
-            setErrorMessage("Invalid email.")
+            setErrorMessage("Fill in the required fields (*).")
             setError(true);
             
             console.log("Invalid form")
