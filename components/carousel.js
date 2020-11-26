@@ -1,27 +1,49 @@
-import React, {Component, useEffect} from 'react'
-import styled from "styled-components"
-import tw from "twin.macro"
+import React, {Component, useState, useEffect} from 'react';
+import styled from "styled-components";
+import tw from "twin.macro";
 
+function create(){
+    return (
+        <CarouselWrapper>
+            {createList()}
+        </CarouselWrapper>
+    )
+}
+function Carousel ({images}) {
 
-export default function Carousel() {
-
+    const [data, setData] = useState([]);
 
     useEffect(() =>{
         // var el = document.querySelector('.firstElement');
         // var offsetX = el.offsetLeft;
         // el.style.left = '1100px';
         // el.innerHTML = "Paragraph changed!";
+        // for (const el in images){
+        //     data.push(images[el]);
+        //     console.log(data);
+        //     setData(data);
+        // }
+
     })
 
+    function createList (){
+        var listItems = [];
+
+        for(var url in images){
+            listItems.push(images[url]);
+        }
+       return listItems.map((img) => <CarouselItem src={`../../static/${img}`} href={img}></CarouselItem>)
+    }
+
+    
     return (
-        <CarouselWrapper >
-            <CarouselItem className="firstElement"/>
-            <CarouselItem/>
-            <CarouselItem/>
-            <CarouselItem/>
+        <CarouselWrapper>
+            {createList()}
         </CarouselWrapper>
     )
 }
+
+export default Carousel;
 
 
 /**
@@ -48,6 +70,6 @@ export default function Carousel() {
     }
  `
 
- const CarouselItem = styled.div` 
-    ${tw`flex-none bg-black w-full md:w-11/12 lg:w-5/6 xl:w-4/6 `}
+ const CarouselItem = styled.img` 
+    ${tw`flex-none object-contain w-full md:w-11/12 lg:w-5/6 xl:w-4/6 `}
  `

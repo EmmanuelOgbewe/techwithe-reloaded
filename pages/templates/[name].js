@@ -109,9 +109,9 @@ const QuoteForm = ({setCompleted, templateData}) => {
                     <Input onChange={onChange} name="email" placeholder="Email*"/>
                     <Input onChange={onChange} name="phoneNumber" placeholder="Phone number"/>
                  </ModalFormInputOne>
-                 <ModalFormComment>
+                 {/* <ModalFormComment>
                      <TextArea onChange={onChange} name="comments" placeholder="Please list any wanted customizations and/or additional questions you might have?" rows={6}/>
-                </ModalFormComment>
+                </ModalFormComment> */}
                     
              </ModalSectionTwo>
             <GetQuoteButton disabled={showLoader} onClick={handleSubmit}>{showLoader ? <Spin indicator={antIcon}></Spin> :  "Get Quote"}</GetQuoteButton>
@@ -198,7 +198,7 @@ export default function Details({templateData}) {
                         </ModalTemplateDetails>
                         
                         <div className="  justify-center items-center hidden lg:flex lg:h-56  xxl:h-64 xxl:pt-0 xxl:pl-16">
-                            <img className=" "  src="https://images.unsplash.com/photo-1493946947703-a0e68b050bee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" ></img>
+                            <img className="object-contain "  src={`../../static/${images[0]}`} ></img>
                         </div>
                     </ModalSectionOne>
                     }
@@ -226,19 +226,19 @@ export default function Details({templateData}) {
                         <button className="focus:outline-none font-light" onClick={() => showModal()}>{`Starting at $${templateDetails.s_price}`}</button>
                     </Price> 
                     <Preview>
-                        <a  href="https://emmanuelogbewe.github.io/techwithe/#/">Preview in browser</a>   
+                        <a  href={templateDetails.preview} target="_blank">Preview in browser</a>   
                     </Preview>
                 </div>
 
             </SectionOneWrapper>
             <MainTemplateImage>
                 <div >
-                    <img src="https://images.unsplash.com/photo-1493946947703-a0e68b050bee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" ></img>
+                    <img src={`../../static/${images[0]}`} ></img>
                 </div>
                
             </MainTemplateImage>
         </WrapperStyle>
-        <Carousel/>
+        <Carousel images={templateDetails.images}/>
         <TemplateDetails>
             <FeaturesList>
                 <FeatureSectionTitle>Features </FeatureSectionTitle>

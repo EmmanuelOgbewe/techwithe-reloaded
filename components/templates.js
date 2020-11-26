@@ -5,18 +5,18 @@ import {FAQ} from '../pages/faq'
 import {templatesData} from "../lib/data"
 import Link from 'next/link'
 
-function CollectionItem({url, templateName,category }) {
+function CollectionItem({url, img, templateName,price,category }) {
     return (
         <CollectionItemStyle>
             <div>   
-                <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"></img>
+                <img src={`../../static/${img}`} href={`image ${img}`}></img>
                 <TemplateDescription>
                     <div >
                         <section>
                             <h1 className="">{templateName}</h1>
                             <p className="">{category}</p>
                         </section> 
-                        <Link  href={`/templates/${templateName}`}passHref><StyledLink>View</StyledLink></Link>
+                        <Link  href={`/templates/${templateName}`}passHref><StyledLink>{`$${price} USD`}</StyledLink></Link>
                     </div>
                 </TemplateDescription>
             </div>
@@ -28,7 +28,7 @@ function CollectionItem({url, templateName,category }) {
 
 function createItems() {
     return (Object.keys(templatesData).map((template) => {
-        return <CollectionItem key={template} templateName={template} category={templatesData[template].category}/>
+        return <CollectionItem key={template} img={templatesData[template].images[0]} price={templatesData[template].s_price} templateName={template} category={templatesData[template].category}/>
     }));
 }
 
@@ -86,9 +86,9 @@ const CollectionItemStyle = styled.main.attrs({
     }
 `
 const StyledLink = styled.a.attrs((props) => ({
-    className : 'border border-gray-600 flex items-center justify-center  h-10 w-24'
+    className : ' flex items-center justify-center  h-10 w-24'
 }))`
-    ${tw`  text-sm font-normal text-center  text-black hover:text-black focus:text-black`}
+    ${tw`  text-base font-normal text-center  text-black hover:text-black focus:text-black`}
 `
 
 const TemplatesWrapperStyle = styled.main.attrs({

@@ -8,16 +8,17 @@ import tw from "twin.macro"
 
 import '../styles/Collapse.module.css'
 
-const q1 = `Can I customize this template?`
+const q1 = `Can I customize templates?`
 const q1Ans = `
-    Yes. Select 'Get Started' below. Then fill out the form with customizations you would like to add. Within 3-5 business days you will\n
-    receive an email with the adjusted price and details to prepare your site.' 
+    Yes. Contact me for more information.' 
 `;
 
 const q2 = `Do I set up the website?`
 const q2Ans = `No. We set up the website for you! When finding a template that you like
 select the 'Starting at' or 'Get Started' button and fill out the form. You will receive an email from us with your estimated price and instructions on how to move forward. `
 
+const q3 = `Do you offer hosting?`
+const q3Ans = `We do not offer our own hosting service, we use a third party service to host your site.`
 const { Panel } = Collapse;
 export const FAQ  = () => {
     return (
@@ -33,8 +34,8 @@ export const FAQ  = () => {
             <Panel header={q2} key="2" className="site-collapse-custom-panel">
             <p>{q2Ans}</p>
             </Panel>
-            <Panel header="This is panel header 3" key="3" className="site-collapse-custom-panel">
-            <p>{q2Ans}</p>
+            <Panel header={q3} key="3" className="site-collapse-custom-panel">
+            <p>{q3Ans}</p>
             </Panel>
         </Collapse>
     )

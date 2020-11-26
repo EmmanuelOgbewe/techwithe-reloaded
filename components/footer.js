@@ -152,7 +152,8 @@ export default class Footer extends Component {
                     <CopyRightInfo>
                        
                             <label className="text-left">© 2020 TechWithE. All Rights Reserved</label>
-                            <label className="text-left md:text-center">Made with ♥ by Emmanuel Ogbewe</label>
+                            <label className="text-left md:text-center">Made with ♥ in Maryland
+                            </label>
                         
                     </CopyRightInfo>
                     
