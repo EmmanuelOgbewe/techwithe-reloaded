@@ -9,14 +9,17 @@ function CollectionItem({url, img, templateName,price,category }) {
     return (
         <CollectionItemStyle>
             <div>   
-                <img src={`../../static/${img}`} href={`image ${img}`}></img>
+                <Link  href={`/templates/${templateName}`}passHref>
+                    <img className="cursor-pointer" src={`../../static/${img}`} href={`image ${img}`}></img>
+                </Link>
+               
                 <TemplateDescription>
                     <div >
                         <section>
-                            <h1 className="">{templateName}</h1>
+                            <Link  href={`/templates/${templateName}`}passHref><h1 className="cursor-pointer">{templateName}</h1></Link>
                             <p className="">{category}</p>
                         </section> 
-                        <Link  href={`/templates/${templateName}`}passHref><StyledLink>{`$${price} USD`}</StyledLink></Link>
+                        <h2>{`$${price} USD`}</h2>
                     </div>
                 </TemplateDescription>
             </div>
@@ -61,6 +64,10 @@ const TemplateDescription = styled.div`
         h1, p {
             ${tw`m-0`}
         }
+
+        h2 {
+            ${tw``}
+        }
     }
 `
 
@@ -78,10 +85,13 @@ const CollectionItemStyle = styled.main.attrs({
 
 
         h1{
-            ${tw`font-normal text-base`}
+            ${tw`font-medium text-base md:text-lg`}
+        }
+        h2 {
+            ${tw`font-normal text-gray-700 text-base md:text-lg`}
         }
         p {
-            ${tw`text-gray-700 font-normal text-sm`}
+            ${tw`text-gray-700 font-normal text-base `}
         }
     }
 `

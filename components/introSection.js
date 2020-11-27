@@ -23,7 +23,7 @@ const IntroSection = () => {
             </SectionOneWrapper>
             <SectionTwoWrapper section="two">
                 <div>
-                    <img src="https://images.unsplash.com/photo-1493946947703-a0e68b050bee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" ></img>
+                    <img className="mw-1/4" src="../../static/templates_main_graphic.png" ></img>
                 </div>
                {/* <div>
                     <img src="https://images.unsplash.com/photo-1493946947703-a0e68b050bee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" ></img>

@@ -133,7 +133,7 @@ export default class Footer extends Component {
                         <Sections>
                             <div>
                                 <h1>Get Help</h1>
-                                <Link href="/" passHref> 
+                                <Link href="mailto:techwithe@gmail.com" target="_blank" passHref> 
                                     <StyledLink>Contact</StyledLink> 
                                 </Link>
                             </div>

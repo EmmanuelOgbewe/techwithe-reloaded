@@ -19,9 +19,8 @@ import { useRouter } from 'next/router'
 
 
 
-const submissionInfo = 'Fill out the form below and you will be contacted within 3 - 5 business days with a quote for your site.';
-const submissionCompleted = `You will be contacted within 1 - 5 business days with a quote for your site and \n
-more information on moving forward. Thank you!`;
+const submissionInfo = 'Fill out the form below and you will be contacted within 3 - 5 business days with instructions on how to move forward.';
+const submissionCompleted = `Check your email to verify we received your request. You will be contacted within 3 - 5 business days with instructions on moving forward. Thank you!`;
 
 const QuoteForm = ({setCompleted, templateData}) => {
     const [fname , setFirstName] = useState("");
@@ -114,7 +113,7 @@ const QuoteForm = ({setCompleted, templateData}) => {
                 </ModalFormComment> */}
                     
              </ModalSectionTwo>
-            <GetQuoteButton disabled={showLoader} onClick={handleSubmit}>{showLoader ? <Spin indicator={antIcon}></Spin> :  "Get Quote"}</GetQuoteButton>
+            <GetQuoteButton disabled={showLoader} onClick={handleSubmit}>{showLoader ? <Spin indicator={antIcon}></Spin> :  "Send Request"}</GetQuoteButton>
         </div>
     )
 }
@@ -223,7 +222,7 @@ export default function Details({templateData}) {
                 <p>{templateDetails.description} </p>
                 <div className=" flex flex-col pr-32 md:pr-0 md:flex-row mt-12 md:space-x-8  ">
                     <Price>
-                        <button className="focus:outline-none font-light" onClick={() => showModal()}>{`Starting at $${templateDetails.s_price}`}</button>
+                        <button className="focus:outline-none font-light" onClick={() => showModal()}>{`Starting $${templateDetails.s_price} USD`}</button>
                     </Price> 
                     <Preview>
                         <a  href={templateDetails.preview} target="_blank">Preview in browser</a>   
@@ -252,7 +251,7 @@ export default function Details({templateData}) {
         </TemplateDetails>
         <CustomizeBanner>
             <Title>Want to make Customizations?</Title>
-            <SubTitle>All templates offered can be customized. Contact me below to get started.</SubTitle>
+            <SubTitle>All templates offered can be customized. Contact us below to get started.</SubTitle>
             <GetStarted onClick={()=> showModal()}>Get Started </GetStarted>
         </CustomizeBanner>
         <QuoteModal></QuoteModal>
