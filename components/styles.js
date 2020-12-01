@@ -36,6 +36,6 @@ export const SectionTwoWrapper = styled.main.attrs({
     }
 `
 export const WrapperStyle = styled.main.attrs( (props) =>  ({
-    className : `grid grid-rows-1 lg:grid-cols-2 gap-8   w-screen mb-12 mt-12 sm:mt-16 ${props.marginTop} pl-8 md:pl-12 lg:pl-24`
+    className : `grid grid-rows-1 lg:grid-cols-2 gap-8   w-screen mb-12 mt-12 sm:mt-16 ${props.marginTop} pl-8  md:pl-12  lg:pl-24`
 }))`
 `

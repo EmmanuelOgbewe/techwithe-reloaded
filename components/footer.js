@@ -94,7 +94,7 @@ export default class Footer extends Component {
                             <label className="text-white">Stay up to date by joining the email list. </label>
                         </StayUpToDate>
                         <EmailInput>
-                            <input type="text" placeholder="Type your email" onChange={this.changeEmail}/>
+                            <input type="text" placeholder="Enter your email" onChange={this.changeEmail}/>
                         </EmailInput>
                         <label className={`text-red-500 w-11/12 md:w-8/12 lg:w-3/5 xl:w-1/3  mt-4 ${this.state.errorMessage == null ? 'hidden': ''} `}>{this.state.errorMessage}</label>
                         <div className=" w-full mt-16 flex flex-col items-center ">
@@ -107,15 +107,13 @@ export default class Footer extends Component {
                         <Sections>
                             <div>
                                 <h1>Explore</h1>
-                                <button onClick={() => scrollToDiv("templates", "/")} href="">Templates</button>
                                 {/* <a href="">Pricing</a> */}
                                 <Link href="/" passHref> 
                                     <StyledLink>Home</StyledLink> 
                                 </Link>
-                                <Link href="/faq" passHref> 
-                                    <StyledLink>FAQ</StyledLink> 
-                                </Link>
-            
+                                <button className="flex text-start" onClick={() => scrollToDiv("learn", "/")} href="">Learn</button>
+                                <button onClick={() => scrollToDiv("templates", "/templates")} href="">Web Templates</button>
+                            
                             </div>
                         </Sections>
                         <Sections>
@@ -127,6 +125,9 @@ export default class Footer extends Component {
                                 </Link>
                                 <Link href="/privacy" passHref> 
                                     <StyledLink>Privacy</StyledLink> 
+                                </Link>
+                                <Link href="/faq" passHref> 
+                                    <StyledLink>FAQ</StyledLink> 
                                 </Link>
                             </div>
                         </Sections>
@@ -152,8 +153,7 @@ export default class Footer extends Component {
                     <CopyRightInfo>
                        
                             <label className="text-left">© 2020 TechWithE. All Rights Reserved</label>
-                            <label className="text-left md:text-center">Made with ♥ in Maryland
-                            </label>
+                            <label className="text-left md:text-center" >Made with ♥ <a className="" href="https://instagram.com/emmanuelogbewe/" >Emmanuel Ogbewe</a> </label>
                         
                     </CopyRightInfo>
                     
@@ -174,17 +174,17 @@ const StayUpToDate = styled.label`
     }
 `
 const EmailInput = styled.main.attrs({
-     className : 'flex flex-col font-light justify-center bg-darkGrey bg-opacity-50 w-11/12 md:w-8/12 lg:w-3/5 xl:w-1/3 mt-8 md:mt-16 justify-center'
+     className : 'flex flex-col font-light justify-center bg-white  w-11/12 md:w-8/12 lg:w-3/5 xl:w-1/3 mt-8 md:mt-16 justify-center'
 })`
     input {
-        ${tw`placeholder-gray-300 placeholder-opacity-50 bg-transparent text-white outline-none bg-opacity-75 pt-4 pb-4 pl-4 pr-4 w-full`}
+        ${tw`placeholder-gray-800 placeholder-opacity-75 bg-transparent text-black outline-none bg-opacity-75 pt-4 pb-4 pl-4 pr-4 w-full`}
     }
 `
 const SendButton = styled.button`
     ${tw`text-white border-solid border p-2 pl-4 pr-4`}
 `
 const FooterWrapper = styled.main.attrs({
-    className : 'bg-darkTheme mt-8 lg:mt-24'
+    className : 'bg-darkTheme mt-8 xl:mt-0 xxl:mt-12 '
 })` 
 `
 const SectionsWrapper = styled.div`
@@ -223,8 +223,13 @@ const CopyRightInfo = styled.main.attrs({
 })`
 
     & {
-        label {
-            ${tw`w-full text-sm md:text-base`}
+        label, a {
+            ${tw`w-full text-sm md:text-base text-white text-opacity-25`}
         }
+
+        a {
+            ${tw`hover:text-opacity-50`}
+        }
+        
     }
 `

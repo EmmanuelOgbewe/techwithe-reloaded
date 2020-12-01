@@ -16,8 +16,10 @@ export default class Navbar extends Component {
             presentMenu : false,
             isScrolling : false,
         }
+        
         this.getBrowserSize = this.getBrowserSize.bind(this);
         this.userDidScroll = this.userDidScroll.bind(this);
+        this.handleNavigation = this.handleNavigation.bind(this);
 
        
     }
@@ -44,8 +46,8 @@ export default class Navbar extends Component {
         }
     }
     userDidScroll() {
-    
-        if(window.pageYOffset > 0){
+      
+        if(window.pageYOffset > 0 && this.props.darkMode == false){
             this.setState({
                 isScrolling : true
             })
@@ -57,8 +59,11 @@ export default class Navbar extends Component {
         }
     }
 
-    handleNavigation(){
-      scrollToDiv("templates", "/");
+    handleNavigation(id, src){
+     if(this.state.presentMenu === true) {
+      this.showMenu();
+     }
+      scrollToDiv(id,src);
     }
 
 
@@ -68,18 +73,19 @@ export default class Navbar extends Component {
               <Head>
               
               </Head>
-                <NavBarStyle isScrolling={this.state.isScrolling} presentMenu={this.state.presentMenu} >
+                <NavBarStyle darkMode={this.props.darkMode}  isScrolling={this.state.isScrolling} presentMenu={this.state.presentMenu} >
                     <Link href="/"><h1 className="cursor-pointer">TECHW/E</h1></Link>
                     <Links presentMenu={this.state.presentMenu}>
-                        <Link href={"/"} passHref><StyledLink presentMenu={this.state.presentMenu} >Home</StyledLink></Link>
-                        <NavItem onClick={() => this.handleNavigation()}><StyledLink presentMenu={this.state.presentMenu} >Templates</StyledLink></NavItem>
-                        <Link href={"/faq"} passHref><StyledLink presentMenu={this.state.presentMenu} >FAQ</StyledLink></Link>
+                        <Link href={"/"} passHref><StyledLink darkMode={this.props.darkMode} presentMenu={this.state.presentMenu} >Home</StyledLink></Link>
+                        <NavItem presentMenu={this.state.presentMenu} onClick={() => this.handleNavigation("learn",'/')}><StyledLink darkMode={this.props.darkMode}  presentMenu={this.state.presentMenu} >Learn</StyledLink></NavItem>
+                        <NavItem presentMenu={this.state.presentMenu} onClick={() => this.handleNavigation("about",'/')}><StyledLink darkMode={this.props.darkMode}  presentMenu={this.state.presentMenu} >About</StyledLink></NavItem>
+                       
                         {/* <Link href={"/"} passHref><StyledLink presentMenu={this.state.presentMenu} >About</StyledLink></Link> */}
                         {/* <a href="https://www.w3schools.com">Learn</a> */}
-                        <Link href="mailto:techwithe@gmail.com" target="_blank" passHref><StyledLink presentMenu={this.state.presentMenu} >Contact</StyledLink></Link>
+                        <Link href="mailto:techwithe@gmail.com" target="_blank" passHref><StyledLink darkMode={this.props.darkMode}  presentMenu={this.state.presentMenu} >Contact</StyledLink></Link>
                     </Links>
                     <MenuButton onClick={() => this.showMenu()} presentMenu={this.state.presentMenu}>
-                      <FontAwesomeIcon icon={faBars} color={this.state.presentMenu ? 'white' : 'black'} size="lg" />
+                      <FontAwesomeIcon icon={faBars} color={this.state.presentMenu || this.props.darkMode ? 'white' : 'black'} size="lg" />
                     </MenuButton>
                 </NavBarStyle>
                
@@ -91,25 +97,27 @@ export default class Navbar extends Component {
 
 
 const NavBarStyle = styled.main.attrs( props => ({
-    className : `flex flex-row  z-10  fixed  ${props.isScrolling ? 'transition-all duration-100 border-b border-gray-400' : 'tansition-all duration-500 border-0 border-white'} ${props.presentMenu ? 'transition-all duration-500 h-64  ' : ' transition-all duration-500 h-12 sm:h-16  lg:h-24 space-x-16 xl:space-x-32'} items-start lg:items-center  justify-between lg:justify-start pt-4 lg:pt-0 pl-8 lg:pl-24 xxl:pl-56  pr-8 w-screen `
+    className : `flex flex-row  z-10  fixed  ${props.isScrolling ? 'transition-all duration-100 border-b border-gray-400' : 'tansition-all duration-500 border-0 border-white'} ${props.presentMenu ? 'transition-all duration-500 h-64  ' : ' transition-all duration-500 h-12 sm:h-16  lg:h-24 space-x-16 xl:space-x-32'} items-start lg:items-center  justify-between lg:justify-start pt-4 lg:pt-0 pl-8 md:pl-12 lg:pl-24 xxl:pl-56  pr-8 w-screen `
   }))`
-    background-color : ${props => props.presentMenu ? '#101010' : 'white'};
+    background-color : ${props => props.presentMenu || props.darkMode ? '#101010' : 'white' };
     & {
         h1 {
-            ${props => props.presentMenu ?  tw`text-base sm:text-2xl italic font-semibold mb-0 text-white  lg:pl-16` : tw`text-base mb-0 sm:text-2xl italic font-bold text-black ` }
+            ${props => props.presentMenu || props.darkMode ?  tw`text-base sm:text-2xl italic font-semibold mb-0 text-white  ` : tw`text-base mb-0 sm:text-2xl italic font-bold text-black ` }
         }
 
     }
   `
 
 const StyledLink = styled.a.attrs((props) => ({
-    className : `${props.presentMenu ?  'text-white'  : 'text-gray-700' }`
+    className : `${props.presentMenu || props.darkMode ?   'text-white hover:text-white hover:text-opacity-75'  : 'text-gray-700 focus:text-black' }  text-base font-light`
 }))`
-    ${tw`  text-base font-normal  hover:text-black focus:text-black`}
+    
 `
 
-  const NavItem = styled.button`
-    ${tw`text-base text-gray-700 focus:outline-none text-left`}
+  const NavItem = styled.button.attrs((props) => ({
+    className : `${props.presentMenu ? 'text-white' : 'text-white-700' } text-base focus:outline-none text-left`
+  }))`
+   
   `
   
   const Links = styled.main.attrs(props => ({

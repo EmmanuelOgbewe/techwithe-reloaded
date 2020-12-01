@@ -1,9 +1,14 @@
 import React, {Component} from 'react';
+
 import styled from "styled-components"
 import tw from "twin.macro"
 import {FAQ} from '../pages/faq'
 import {templatesData} from "../lib/data"
 import Link from 'next/link'
+import Navbar from "./navbar";
+import IntroSection from "./introSection";
+import Footer from "./footer";
+import Head from "next/head";
 
 function CollectionItem({url, img, templateName,price,category }) {
     return (
@@ -35,9 +40,21 @@ function createItems() {
     }));
 }
 
+
+
 function Templates () {
     return (
-        <TemplatesWrapperStyle id="templates">
+
+        <div className="flex flex-col bg-white h-screen w-screen">
+            <Head>
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"></link>
+            <link rel="shortcut icon" href="/static/techwithe_browser_icon.png" />
+            </Head>
+            {/* <script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>
+            <script noModule="" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.js"></script> */}
+            <Navbar/>
+            <IntroSection/>
+            <TemplatesWrapperStyle id="templates">
             <div>
                 <NewTemplates>
                     <h1>New templates</h1>
@@ -46,10 +63,11 @@ function Templates () {
                 <Collections>
                     {createItems()}
                 </Collections>
-                
             </div>
-
-        </TemplatesWrapperStyle>
+            </TemplatesWrapperStyle>    
+            <Footer/>
+      
+        </div>
     )
 }
 
