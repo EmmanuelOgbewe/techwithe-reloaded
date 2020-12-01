@@ -54,12 +54,12 @@ function HomePage() {
               <h1 className="text-white">of tech</h1>
             </section>
             <p>A platform to learn about technology.</p>
-            <LearnMore>Learn More</LearnMore>
+            <LearnMore onClick={()=> scrollToDiv('learn','/')}>Learn More</LearnMore>
           </SectionOneWrapper>
         </HomeWrapper>
         <SectionTemplate id="learn" subTitle="Learn" mainTitle="Videos and Courses" description = "Do you enjoy tech videos? Or Interested in learning how to code?  Join the newsletter to get notified when they launch." onSelect={() => scrollToDiv('footer','/')} buttonTitle="I'm Interested" src="/static/learn_back_image.png"/>
         <SectionTemplate  subTitle="Resources" mainTitle="Web Templates" description = "Looking to build a website for your business or a client? Check out my templates." buttonTitle="View Templates" onSelect={()=> scrollToDiv('templates', '/templates')} />
-        <SectionTemplate id="about"  subTitle="Creator of TechWithE"  description = "Emmanuel is a freelance developer who discovered their passion for programming 5 years ago. He created this platform to teach others programming and share his knowledge on the technology we use every day." />
+        <SectionTemplate id="about"  subTitle="Creator of TechWithE"  description = "Emmanuel is a freelance developer who discovered his passion for programming 5 years ago. He created this platform to teach others programming and share his knowledge on the technology we use every day." />
         <Footer/>
       
     </div>
